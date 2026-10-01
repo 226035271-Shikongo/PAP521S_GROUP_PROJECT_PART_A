@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <string.h>
+#include <stdio.h> //allow us to use the printf() and scanf() to display and receive information
+#include <string.h> //allows us to work with strings such as employee names, departments and ect
 
 struct Employee {
     int ID;
@@ -7,16 +7,16 @@ struct Employee {
     char gender[10];
     char dateOfBirth[11];      
     char email[50];
-    char cellPhoneNumber[11]; 
+    char cellPhoneNumber[11];  
     char department[30];
     float salary;
     float housingAllowance;
     float transportAllowance;
 };
-
+//array to store employees 
 struct Employee employee[100];
 int employeeCount = 0;
-
+//function declarations
 void addEmployee();
 void displayEmployee();
 void searchEmployee();
@@ -45,7 +45,7 @@ int main() {
     } while (choice != 5);
     return 0;
 }
-
+//Function to add employees
 void addEmployee() {
     if (employeeCount >= 100) {
         printf("Employee list is full!\n");
@@ -84,7 +84,7 @@ void addEmployee() {
     employeeCount++;
     printf("\nEmployee added successfully!\n");
 }
-
+/function to display employees
 void displayEmployee() {
     int i;
     if (employeeCount == 0) {
@@ -105,7 +105,7 @@ void displayEmployee() {
         printf("Transport Allowance: %.2f\n", employee[i].transportAllowance);
     }
 }
-
+//function to search for an employee
 void searchEmployee() {
     int ID, i, found = 0;
 
@@ -129,7 +129,7 @@ void searchEmployee() {
         printf("\nEmployee not found!\n");
     }
 }
-
+//function to calculate employee salary 
 void calculateSalary() {
     int ID, i, found = 0;
     float totalSalary;
