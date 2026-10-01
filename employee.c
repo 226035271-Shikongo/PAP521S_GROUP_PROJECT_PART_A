@@ -5,9 +5,9 @@ struct Employee {
     int ID;
     char name[25];
     char gender[10];
-    char dateOfBirth[11];      // e.g. 12/05/1998
+    char dateOfBirth[11];      
     char email[50];
-    char cellPhoneNumber[11];  // 10 digits + '\0'
+    char cellPhoneNumber[11]; 
     char department[30];
     float salary;
     float housingAllowance;
