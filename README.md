@@ -9,4 +9,4 @@ MUNICIPALITY FINANCIAL MANAGEMENT SYSTEM
 | ANDREAS SHIKONGO | 226035271 | Developer | Asset Management (`assets.c`, `assets.h`) |
 | ALZAREO DAWEB|226010935| Developer | Reports Module (`reports.c`, `reports.h`) |
 | MUYAKALE | 226161730 | Systems Analyst | Integration, Main Menu, & Data Validation (`utils.c`) |
-| Student 7 | 221000007 | QA & Admin | GitHub Lead, Testing, & Technical Documentation |
+| JAMES KAMBARA | 226169057| QA & Admin | GitHub Lead, Testing, & Technical Documentation |
