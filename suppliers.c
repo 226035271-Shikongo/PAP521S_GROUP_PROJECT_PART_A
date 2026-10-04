@@ -1,52 +1,148 @@
 #include <stdio.h>
 #include <string.h>
 #include "suppliers.h"
+#include "utils.h"
 
 Supplier suppliers[MAX_SUPPLIERS];
 int supCount = 0;
 
-void addSupplier() {
-    Supplier s;
-    printf("Enter Supplier ID: "); scanf("%d", &s.id);
-    printf("Enter Name: "); scanf("%s", s.name);
-    printf("Enter Email: "); scanf("%s", s.email);
-    printf("Enter Phone: "); scanf("%s", s.phone);
-    printf("Enter Town: "); scanf("%s", s.town);
-    suppliers[supCount++] = s;
-}
-
-void displaySuppliers() {
+int findSupplierById(int id)
+{
     for (int i = 0; i < supCount; i++) {
-        printf("%d | %s | %s | %s | %s\n", suppliers[i].id, suppliers[i].name,
-               suppliers[i].email, suppliers[i].phone, suppliers[i].town);
-    }
-}
-
-void searchSupplier() {
-    char name[50];
-    printf("Enter Supplier Name to search: ");
-    scanf("%s", name);
-    for (int i = 0; i < supCount; i++) {
-        if (strcmp(suppliers[i].name, name) == 0) {
-            printf("Found: %s in %s\n", suppliers[i].name, suppliers[i].town);
-            return;
+        if (suppliers[i].id == id) {
+            return i;
         }
     }
-    printf("Supplier not found.\n");
+    return -1;
 }
 
-void supplierManagement() {
+/* Returns 1 if another supplier already uses this email address. */
+static int emailExists(const char *email)
+{
+    for (int i = 0; i < supCount; i++) {
+        if (equalsIgnoreCase(suppliers[i].email, email)) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static void printSupplierHeader(void)
+{
+    printf("\n%-6s %-22s %-26s %-16s %-14s\n", "ID", "Name", "Email", "Phone", "Town");
+    printf("---------------------------------------------------------------------------------\n");
+}
+
+static void printSupplierRow(const Supplier *s)
+{
+    printf("%-6d %-22.22s %-26.26s %-16.16s %-14.14s\n",
+           s->id, s->name, s->email, s->phone, s->town);
+}
+
+void addSupplier(void)
+{
+    Supplier s;
+
+    if (supCount >= MAX_SUPPLIERS) {
+        printf("Supplier list is full (maximum %d).\n", MAX_SUPPLIERS);
+        return;
+    }
+
+    printf("\n--- Add Supplier ---\n");
+
+    for (;;) {
+        s.id = readInt("Enter Supplier ID: ", 1, MAX_ID);
+        if (findSupplierById(s.id) == -1) {
+            break;
+        }
+        printf("Supplier ID %d already exists. Please use a different ID.\n", s.id);
+    }
+
+    readNonEmpty("Enter Supplier Name: ", s.name, sizeof s.name);
+
+    for (;;) {
+        readEmail("Enter Email: ", s.email, sizeof s.email);
+        if (!emailExists(s.email)) {
+            break;
+        }
+        printf("A supplier with that email already exists.\n");
+    }
+
+    readPhone("Enter Telephone Number: ", s.phone, sizeof s.phone);
+    readNonEmpty("Enter Town/Location: ", s.town, sizeof s.town);
+
+    suppliers[supCount++] = s;
+    printf("Supplier added successfully!\n");
+}
+
+void displaySuppliers(void)
+{
+    if (supCount == 0) {
+        printf("No suppliers registered yet.\n");
+        return;
+    }
+
+    printSupplierHeader();
+    for (int i = 0; i < supCount; i++) {
+        printSupplierRow(&suppliers[i]);
+    }
+}
+
+void searchSupplier(void)
+{
+    int found = 0;
+
+    if (supCount == 0) {
+        printf("No suppliers registered yet.\n");
+        return;
+    }
+
+    printf("\nSearch by:\n1. Supplier ID\n2. Name\n3. Town/Location\n");
+    int option = readMenuChoice("Enter your choice: ", 1, 3);
+
+    if (option == 1) {
+        int id = readInt("Enter Supplier ID: ", 1, MAX_ID);
+        int index = findSupplierById(id);
+        if (index != -1) {
+            printSupplierHeader();
+            printSupplierRow(&suppliers[index]);
+            found = 1;
+        }
+    } else {
+        char keyword[SUP_NAME_LEN];
+        readNonEmpty("Enter search text: ", keyword, sizeof keyword);
+
+        for (int i = 0; i < supCount; i++) {
+            const char *field = (option == 2) ? suppliers[i].name : suppliers[i].town;
+            if (containsIgnoreCase(field, keyword)) {
+                if (found == 0) {
+                    printSupplierHeader();
+                }
+                printSupplierRow(&suppliers[i]);
+                found++;
+            }
+        }
+    }
+
+    if (!found) {
+        printf("No matching supplier found.\n");
+    }
+}
+
+void supplierManagement(void)
+{
     int choice;
+
     do {
         printf("\n--- Supplier Management ---\n");
         printf("1. Add Supplier\n2. Display Suppliers\n3. Search Supplier\n4. Back\n");
-        scanf("%d", &choice);
+        choice = readMenuChoice("Enter your choice: ", 1, 4);
+
         switch (choice) {
-            case 1: addSupplier(); break;
+            case 1: addSupplier();      break;
             case 2: displaySuppliers(); break;
-            case 3: searchSupplier(); break;
-            case 4: break;
-            default: printf("Invalid choice.\n");
+            case 3: searchSupplier();   break;
+            default: break;
         }
     } while (choice != 4);
 }
