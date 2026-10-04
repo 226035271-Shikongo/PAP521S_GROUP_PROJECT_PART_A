@@ -14,4 +14,25 @@ MUNICIPALITY FINANCIAL MANAGEMENT SYSTEM
 ### Project description
 The Municipal Financial Management System (MFMS) is a foundational, menu-driven C application designed to assist municipal administration in managing core operational and financial data. Built using standard C (C99), the system provides an integrated solution for employee payroll calculations, departmental budget tracking, supplier directory management, municipal asset recording, and financial summary reporting.   This project serves as the Stage A foundation for the municipality's software architecture, demonstrating core C programming concepts such as modular function design, dynamic input validation, array processing, struct data management, and string manipulation. 
 #### System features
-ModuleCore Functionality & Capabilities1. Main Navigation MenuProvides a clear, interactive menu-driven interface for navigating system modules.Handles invalid numerical inputs gracefully to prevent program crashes.   2. Employee ManagementRecord Entry: Captures Employee ID, Name, Department, Basic Salary, Housing Allowance, and Transport Allowance.Automated Calculation: Computes total gross salary based on basic pay and allowances.Display & Search: Displays employee records in a clean tabular view and supports lookup by Employee ID using string functions (strcmp).   3. Budget ManagementAllocation & Tracking: Records departmental budget allocations and total expenditure.Balance Calculation: Computes remaining departmental balance and flags over-budget departments (EXCEEDED vs WITHIN BUDGET).Summary Display: Presents status summaries for municipal accounting.   4. Supplier ManagementDirectory Maintenance: Stores Supplier ID, Supplier Name, Email, Telephone Number, and Location/Town.Display & Lookup: Lists active suppliers and supports text searches by supplier name.   5. Asset RegisterAsset Tracking: Records municipal assets including vehicles, computers, buildings, equipment, and office furniture.Data Fields: Captures Asset ID, Name, Type, Purchase Value, Department, and Condition.Search Capabilities: Displays all registered assets and supports lookup by Asset ID.   6. Reports ModuleEmployee Analytics: Summarizes total employee count, average salary, highest salary, and lowest salary.Budget Analytics: Shows total municipal allocation, total expenditure, net balance, and count of over-budget departments.Supplier & Asset Analytics: Displays total active suppliers, registered asset counts, and aggregate municipal asset value.Consolidated Summary: Generates an all-in-one financial and operational summary report.   7. Input Validation & ReliabilityRejects negative values for salaries, budgets, expenditures, and asset prices.Clears input buffers to handle empty name strings and invalid menu choices.   
+### System Features
+
+| Module | Sub-Module / Feature | Description & Functionality |
+| :--- | :--- | :--- |
+| **Main Menu** | Navigation | Provides a menu-driven interface for selecting system modules[cite: 2]. |
+| | Input Validation | Catches invalid menu options and numerical entry errors gracefully[cite: 6]. |
+| **Employee Management** | Record Entry | Captures Employee ID, Name, Department, Basic Salary, Housing Allowance, and Transport Allowance[cite: 2, 3]. |
+| | Payroll Calculation | Computes total gross salary automatically based on basic pay and allowances[cite: 2]. |
+| | Search & Display | Tabulates all employee records and supports ID lookup via string comparison (`strcmp`)[cite: 2, 5]. |
+| **Budget Management** | Allocation Tracking | Records departmental allocated budgets and operational expenditures[cite: 3]. |
+| | Balance Calculation | Computes remaining balances and flags over-budget departments (`EXCEEDED` vs `WITHIN BUDGET`)[cite: 3]. |
+| | Financial Summary | Displays clear departmental budget statuses for municipal oversight[cite: 3]. |
+| **Supplier Management** | Directory | Stores Supplier ID, Supplier Name, Email, Telephone Number, and Location/Town[cite: 3]. |
+| | Lookup & Display | Displays active suppliers and supports string search by supplier name[cite: 4]. |
+| **Asset Management** | Asset Register | Tracks municipal assets including vehicles, computers, buildings, equipment, and office furniture[cite: 4]. |
+| | Record Fields | Captures Asset ID, Name, Type, Purchase Value, Department, and Condition[cite: 4]. |
+| | Search & Display | Displays complete asset listings and supports search by Asset ID[cite: 4]. |
+| **Reports** | Employee Report | Summarizes total headcount, average salary, highest salary, and lowest salary[cite: 4]. |
+| | Budget Report | Summarizes total allocated budget, total expenditure, remaining balance, and over-budget count[cite: 4, 5]. |
+| | Supplier & Asset Reports | Displays registered supplier counts, asset counts, and total asset portfolio valuation[cite: 5]. |
+| | Full Summary | Generates a consolidated financial and operational summary report[cite: 4, 5]. |
+| **Data Validation** | Input Safeguards | Blocks negative inputs for salaries, budgets, expenditures, and asset prices[cite: 6]. |
