@@ -1,142 +1,37 @@
-
 #include <stdio.h>
-#include <string.h>
 #include "budget.h"
 
-#define MAX_BUDGETS 50
+Budget budgets[MAX_DEPTS];
+int deptCount = 0;
 
-typedef struct {
-    char department[50];
-    float budget;
-    float expenditure;
-} Budget;
+void addBudget() {
+    Budget b;
+    printf("Enter Department: "); scanf("%s", b.deptName);
+    printf("Enter Allocated Budget: "); scanf("%f", &b.allocated);
+    printf("Enter Expenditure: "); scanf("%f", &b.spent);
+    budgets[deptCount++] = b;
+}
 
-void addBudget(Budget budgets[], int *count);
-void addExpenditure(Budget budgets[], int count);
-void displayBudgets(Budget budgets[], int count);
-void showOverBudget(Budget budgets[], int count);
-
-
-
-void addBudget(Budget budgets[], int *count)
-{
-    if (*count >= MAX_BUDGETS) {
-        printf("Budget list is full.\n");
-        return;
+void displayBudgets() {
+    for (int i = 0; i < deptCount; i++) {
+        float remaining = budgets[i].allocated - budgets[i].spent;
+        printf("%s | Allocated: %.2f | Spent: %.2f | Remaining: %.2f | Status: %s\n",
+               budgets[i].deptName, budgets[i].allocated, budgets[i].spent, remaining,
+               (remaining >= 0) ? "WITHIN BUDGET" : "EXCEEDED");
     }
+}
 
-    printf("\nEnter department name: ");
-    scanf("%49s", budgets[*count].department);
-
+void budgetManagement() {
+    int choice;
     do {
-        printf("Enter budget: N$");
-        scanf("%f", &budgets[*count].budget);
-
-        if (budgets[*count].budget < 0)
-            printf("Budget cannot be negative.\n");
-
-    } while (budgets[*count].budget < 0);
-
-    budgets[*count].expenditure = 0;
-
-    (*count)++;
-
-    printf("Budget added successfully.\n");
-}
-
-
-void addExpenditure(Budget budgets[], int count)
-{
-    char name[50];
-    float amount;
-    int i;
-
-    if (count == 0) {
-        printf("\nNo budgets available.\n");
-        return;
-    }
-
-    printf("\nEnter department name: ");
-    scanf("%49s", name);
-
-    for (i = 0; i < count; i++) {
-
-        if (strcmp(budgets[i].department, name) == 0) {
-
-            do {
-                printf("Enter expenditure: N$");
-                scanf("%f", &amount);
-
-                if (amount < 0)
-                    printf("Expenditure cannot be negative.\n");
-
-            } while (amount < 0);
-
-            budgets[i].expenditure += amount;
-
-            printf("Expenditure added successfully.\n");
-
-            if (budgets[i].expenditure > budgets[i].budget)
-                printf("Status: OVER BUDGET\n");
-            else
-                printf("Status: WITHIN BUDGET\n");
-
-            return;
+        printf("\n--- Budget Management ---\n");
+        printf("1. Add Budget\n2. Display Budgets\n3. Back\n");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1: addBudget(); break;
+            case 2: displayBudgets(); break;
+            case 3: break;
+            default: printf("Invalid choice.\n");
         }
-    }
-
-    printf("Department not found.\n");
-}
-
-
-void displayBudgets(Budget budgets[], int count)
-{
-    int i;
-    float remaining;
-
-    printf("\n--- Budget Overview ---\n");
-
-    if (count == 0) {
-        printf("No budgets available.\n");
-        return;
-    }
-
-    for (i = 0; i < count; i++) {
-
-        remaining = budgets[i].budget - budgets[i].expenditure;
-
-        printf("\nDepartment: %s\n", budgets[i].department);
-        printf("Budget:      N$%.2f\n", budgets[i].budget);
-        printf("Expenditure: N$%.2f\n", budgets[i].expenditure);
-        printf("Remaining:   N$%.2f\n", remaining);
-
-        if (budgets[i].expenditure > budgets[i].budget)
-            printf("Status: OVER BUDGET\n");
-        else
-            printf("Status: WITHIN BUDGET\n");
-    }
-}
-
-
-void showOverBudget(Budget budgets[], int count)
-{
-    int i;
-    int found = 0;
-
-    printf("\n--- Departments Over Budget ---\n");
-
-    for (i = 0; i < count; i++) {
-
-        if (budgets[i].expenditure > budgets[i].budget) {
-
-            printf("%s - Over by N$%.2f\n",
-                   budgets[i].department,
-                   budgets[i].expenditure - budgets[i].budget);
-
-            found = 1;
-        }
-    }
-
-    if (!found)
-        printf("No departments are over budget.\n");
+    } while (choice != 3);
 }
