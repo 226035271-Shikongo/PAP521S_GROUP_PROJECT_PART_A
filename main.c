@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include "employees.h"
+#include "budget.h"
+#include "suppliers.h"
+#include "assets.h"
+#include "reports.h"
 
 Employee employees[MAX_EMPLOYEES];
 int empCount = 0;
