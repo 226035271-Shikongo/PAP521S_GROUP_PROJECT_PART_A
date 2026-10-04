@@ -1,5 +1,6 @@
 #include <stdio.h> //allow us to use the printf() and scanf() to display and receive information
 #include <string.h> //allows us to work with strings such as employee names, departments and ect
+#include "employee.h"
 
 #define MAX_EMPLOYEES 100
 #define MAX_AMOUNT 10000000.0
