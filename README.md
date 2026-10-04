@@ -10,3 +10,5 @@ MUNICIPALITY FINANCIAL MANAGEMENT SYSTEM
 | ALZAREO DAWEB|226010935| Developer | Reports Module (`reports.c`, `reports.h`) |
 | MUYAKALE | 226161730 | Systems Analyst | Integration, Main Menu, & Data Validation (`utils.c`) |
 | JAMES KAMBARA | 226169057| QA & Admin | GitHub Lead, Testing, & Technical Documentation |
+Project Description
+The Municipal Financial Management System (MFMS) is a foundational, menu-driven C application designed to assist municipal administration in managing core operational and financial data. Built using standard C (C99), the system provides an integrated solution for employee payroll calculations, departmental budget tracking, supplier directory management, municipal asset recording, and financial summary reporting.   This project serves as the Stage A foundation for the municipality's software architecture, demonstrating core C programming concepts such as modular function design, dynamic input validation, array processing, struct data management, and string manipulation.
