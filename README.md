@@ -14,8 +14,6 @@ MUNICIPALITY FINANCIAL MANAGEMENT SYSTEM
 ### Project description
 The Municipal Financial Management System (MFMS) is a foundational, menu-driven C application designed to assist municipal administration in managing core operational and financial data. Built using standard C (C99), the system provides an integrated solution for employee payroll calculations, departmental budget tracking, supplier directory management, municipal asset recording, and financial summary reporting.   This project serves as the Stage A foundation for the municipality's software architecture, demonstrating core C programming concepts such as modular function design, dynamic input validation, array processing, struct data management, and string manipulation. 
 #### System features
-### System Features
-
 | Module | Sub-Module / Feature | Description & Functionality |
 | :--- | :--- | :--- |
 | **Main Menu** | Navigation | Provides a menu-driven interface for selecting system modules[cite: 2]. |
@@ -34,5 +32,32 @@ The Municipal Financial Management System (MFMS) is a foundational, menu-driven 
 | **Reports** | Employee Report | Summarizes total headcount, average salary, highest salary, and lowest salary[cite: 4]. |
 | | Budget Report | Summarizes total allocated budget, total expenditure, remaining balance, and over-budget count[cite: 4, 5]. |
 | | Supplier & Asset Reports | Displays registered supplier counts, asset counts, and total asset portfolio valuation[cite: 5]. |
+##### Compilation instructions
+## Compilation Instructions
+
+### Prerequisites
+* **Compiler:** Standard GCC Compiler supporting ANSI C / C99 standard (`-std=c99`).
+* **Development Environment:** Visual Studio Code, Terminal (Linux/macOS), or Command Prompt/PowerShell (Windows)[cite: 1].
+
+---
+
+### Project File Structure
+Ensure all C header files (`.h`) and source files (`.c`) are located together in your project root directory[cite: 7]:
+
+```text
+MFMS/
+├── main.c
+├── employees.h
+├── employees.c
+├── budget.h
+├── budget.c
+├── suppliers.h
+├── suppliers.c
+├── assets.h
+├── assets.c
+├── reports.h
+├── reports.c
+└── README.md
+
 | | Full Summary | Generates a consolidated financial and operational summary report[cite: 4, 5]. |
 | **Data Validation** | Input Safeguards | Blocks negative inputs for salaries, budgets, expenditures, and asset prices[cite: 6]. |
