@@ -1,20 +1,17 @@
 #ifndef BUDGET_H
 #define BUDGET_H
 
-#define MAX_BUDGETS 10
+#define MAX_DEPTS 20
 
-typedef struct
-{
-    char department[30];
-    float allocatedBudget;
-    float expenditure;
+typedef struct {
+    char deptName[30];
+    float allocated;
+    float spent;
 } Budget;
 
-/* Budget Management functions */
-void addBudget(Budget budgets[], int *count);
-void enterExpenditure(Budget budgets[], int count);
-void displayBudgets(Budget budgets[], int count);
-void showOverBudget(Budget budgets[], int count);
-void budgetMenu(Budget budgets[], int *count);
+void budgetManagement();
+void addBudget();
+void displayBudgets();
+float calculateBudget(float allocated, float spent);
 
 #endif
