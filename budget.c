@@ -6,7 +6,7 @@
 Budget budgets[MAX_DEPTS];
 int deptCount = 0;
 
-/* Remaining budget = allocated - spent (negative means overspent). */
+
 double calculateBudget(double allocated, double spent)
 {
     return allocated - spent;
@@ -20,7 +20,7 @@ const char *budgetStatus(double remaining)
     return "EXCEEDED";
 }
 
-/* Returns the index of the department (ignoring upper/lower case), or -1. */
+
 int findBudgetByName(const char *name)
 {
     for (int i = 0; i < deptCount; i++) {
